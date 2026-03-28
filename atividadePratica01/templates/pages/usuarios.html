@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+
+{%block content%}
+<div class="container-fluid">
+    <form method="POST">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" name="nome" class="form-control" id="nome" placeholder="Digite seu nome completo" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" placeholder="email@email.com" class="form-control" id="email" required >
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg">Cadastrar</button>
+    </form>
+
+    {%if qtdUsuarios > 0 %}
+    <ul class="list-group" style="margin-top: 10px;">
+        <li class="list-group-item active bg-success border border-success" aria-current="true">Usuários Cadastrados</li>
+        {%for usuario in usuarios%}
+        <li class="list-group-item">{{usuario.nome}} ({{usuario.email}})</li>
+        {%endfor%}
+    </ul>
+    {%else%}
+    <p>Não há usuários cadastrados</p>
+    {%endif%}
+</div>
+{%endblock%}

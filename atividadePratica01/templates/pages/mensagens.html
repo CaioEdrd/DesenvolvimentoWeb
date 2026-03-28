@@ -1,0 +1,33 @@
+{% extends "base.html"%}
+{%block content%}
+<div class="container-fluid">
+    <form method="POST">
+    <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Titulo da mensagem"  name="titulo" required>
+    </div>
+
+    <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label"  >Mensagem</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="conteudo" required placeholder="Escreva sua mensagem"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="usuario">Usuário</label>
+        <select name="usuario_email" class="form-select" aria-label="Default select example">
+            {{usuarios}}
+            <option value="anonimo">Anônimo</option>
+            {%for usuario in usuarios%}
+                <option value="{{usuario.email}}">
+                    {{usuario.nome}} ({{usuario.email}})
+                </option>
+            {%endfor%}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success btn-lg">Enviar</button>
+    </form>
+</div>
+
+{%endblock%}
+
+
+
