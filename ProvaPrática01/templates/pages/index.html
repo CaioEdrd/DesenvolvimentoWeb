@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{%block content%}
+<div class="container-fluid">
+    <h1>Boas Vindas</h1>
+
+    <div>
+        <h4>Quantidade de usuários cadastrados: {{qtdUsuarios}}</h4>
+    </div>
+
+    <div>
+        <h4>Quantidade de mensagens: {{qtdMensagens}}</h4>
+    </div>
+
+    {%for mensagem in mensagens%}
+        <div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ mensagem.titulo }}</h5>
+                    <p class="card-text">{{ mensagem.conteudo }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                             {{ mensagem.data_hora.strftime('%d/%m/%Y %H:%M:%S') }} -
+                            {% if mensagem.usuario_email == "anonimo" %}
+                                Anônimo
+                            {% else %}
+                                {{ mensagem.usuario_email }}
+                            {% endif %}
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
+
+{%endblock%}

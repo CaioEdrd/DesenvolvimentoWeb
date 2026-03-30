@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark"> 
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+            Home
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/mensagens' %}active{% endif %}" href="/mensagens">
+            Mensagens
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/usuarios' %}active{% endif %}" href="/usuarios">
+            Usuários
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
