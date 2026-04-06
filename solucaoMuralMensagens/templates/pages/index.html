@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Bem-vindo ao sistema</h2>
+
+<div class="row mt-4">
+    <div class="col">
+        <div class="card p-3">
+            <h5>Total de usuários</h5>
+            <p>{{ total_usuarios }}</p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card p-3">
+            <h5>Total de mensagens</h5>
+            <p>{{ total_mensagens }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
