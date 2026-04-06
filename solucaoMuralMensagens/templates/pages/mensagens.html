@@ -16,22 +16,26 @@
 
     <button class="btn btn-success">Enviar</button>
 </form>
-
-{% for m in mensagens %}
-<div class="card mb-3">
-    <div class="card-body">
-        <h5 class="card-title">{{ m.titulo }}</h5>
-        <p class="card-text">{{ m.conteudo }}</p>
-        <p class="text-muted">
-            {{ m.data_hora }} -
-            {% if m.usuario_email == "anonimo" %}
-                Anônimo
-            {% else %}
-                {{ m.usuario_email }}
-            {% endif %}
-        </p>
-    </div>
+{% if mensagens %}
+    {% for m in mensagens %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ m.titulo }}</h5>
+                <p class="card-text">{{ m.conteudo }}</p>
+                <p class="text-muted">
+                    {{ m.data_hora }} -
+                    {% if m.usuario_email == "anonimo" %}
+                        Anônimo
+                    {% else %}
+                        {{ m.usuario_email }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+{%else%}
+<div class="alert alert-warning">
+<p>Não há mensagens cadastradas</p>
 </div>
-{% endfor %}
-
+{%endif%}
 {% endblock %}

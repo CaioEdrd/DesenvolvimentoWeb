@@ -9,11 +9,17 @@
     <button class="btn btn-primary">Cadastrar</button>
 </form>
 
-<ul class="list-group">
-    {% for u in usuarios %}
-        <li class="list-group-item">
-            {{ u.nome }} - {{ u.email }}
-        </li>
-    {% endfor %}
-</ul>
+{%if usuarios%}
+    <ul class="list-group">
+        {% for u in usuarios %}
+            <li class="list-group-item">
+                {{ u.nome }} - {{ u.email }} - {{u.qtd_mensagem}}
+            </li>
+        {% endfor %}
+    </ul>
+{%else%}
+<div class="alert alert-warning">
+<p>Não há usuários cadastrados</p>
+</div>
+{%endif%}
 {% endblock %}

@@ -34,7 +34,7 @@ def usuarios_view():
                 flash("Email já cadastrado.", "danger")
                 return redirect("/usuarios")
 
-        usuarios.append({"nome": nome, "email": email})
+        usuarios.append({"nome": nome, "email": email, "qtd_mensagem":0,})
         flash("Usuário cadastrado com sucesso!", "success")
 
         return redirect("/usuarios")
@@ -60,9 +60,15 @@ def mensagens_view():
             "usuario_email": usuario_email
         }
 
+        for u in usuarios:
+            if u["email"] == usuario_email:
+                u["qtd_mensagem"]+=1
+                
         mensagens.append(mensagem)
-        flash("Mensagem criada com sucesso!", "success")
+       
+        mensagens.sort(key=lambda m: m["data_hora"], reverse=True)
 
+        flash("Mensagem criada com sucesso!", "success")
         return redirect("/mensagens")
 
     return render_template(
