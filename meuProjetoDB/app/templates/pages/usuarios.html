@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST">
+    <input type="text" name="nome" placeholder="Nome" class="form-control mb-2" required>
+    <input type="email" name="email" placeholder="Email" class="form-control mb-2" required>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+
+{%if usuarios%}
+<br>
+<ul class="list-group">
+    {% for u in usuarios %}
+        <li class="list-group-item">{{ u.nome }} ({{ u.email }})</li>
+    {% endfor %}
+    </ul>
+{%else%}
+<div class="alert alert-warning">
+    <p>Não há usuários cadastrados</p>
+</div>
+{%endif%}
+{% endblock %}
