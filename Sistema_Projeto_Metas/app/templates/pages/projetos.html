@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Projetos</h2>
+
+<form method="POST" class="card p-3 mb-3">
+    {{ form.hidden_tag() }}
+
+    {{ form.nome.label }}
+    {{ form.nome(class="form-control mb-2") }}
+
+    {% for e in form.nome.errors %}
+        <small class="text-danger">{{ e }}</small>
+    {% endfor %}
+
+    {{ form.descricao.label }}
+    {{ form.descricao(class="form-control mb-2") }}
+
+    {% for e in form.descricao.errors %}
+        <small class="text-danger">{{ e }}</small>
+    {% endfor %}
+
+    <button class="btn btn-primary">Cadastrar</button>
+</form>
+
+<ul class="list-group">
+    {%for p in projetos%}
+    <div>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{p.nome}}</h5>
+                <p class="card-text">{{p.descricao}}</p>
+                <p class="card-text">
+                    <small class="text-muted">
+                        {{ p.data_criacao}} -
+                    </small>
+                </p>
+                <a href="#">Ver Metas</a>
+                <a href="/projetos/editar/{{p.id}}">Editar</a>
+                <a href="/projetos/excluir/{{p.id}}">Excluir</a>
+            </div>
+        </div>
+    </div>
+{%endfor%}
+</ul>
+{% endblock %}

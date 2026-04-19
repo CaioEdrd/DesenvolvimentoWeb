@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Metas</h2>
+
+<form method="POST" class="card p-3 mb-3">
+    {{ form.hidden_tag() }}
+
+    {{ form.descricao.label }}
+    {{ form.descricao(class="form-control mb-2") }}
+
+    {% for e in form.descricao.errors %}
+        <small class="text-danger">{{ e }}</small>
+    {% endfor %}
+
+    {{form.status.label}}
+    {{ form.status(class="form-select mb-2") }}
+
+
+    <button class="btn btn-primary">Cadastrar</button>
+</form>
