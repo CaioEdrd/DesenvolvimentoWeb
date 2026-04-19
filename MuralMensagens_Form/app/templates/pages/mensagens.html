@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Mensagens</h2>
+
+<form method="POST" class="card p-3 mb-3">
+    {{ form.hidden_tag() }}
+
+    {{ form.titulo.label }}
+    {{ form.titulo(class="form-control mb-2") }}
+
+    {{ form.conteudo.label }}
+    {{ form.conteudo(class="form-control mb-2") }}
+
+    {{ form.usuario_id.label }}
+    {{ form.usuario_id(class="form-select mb-2") }}
+
+    <button class="btn btn-success">Enviar</button>
+</form>
+
+{% for m in mensagens %}
+<div class="card mb-2">
+    <div class="card-body">
+        <h5>{{ m.titulo }}</h5>
+        <p>{{ m.conteudo }}</p>
+        <small>{{ m.usuario.nome }}</small><br>
+        <a href="/mensagens/editar/{{ m.id }}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="/mensagens/excluir/{{ m.id }}" class="btn btn-danger btn-sm">Excluir</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Usuários</h2>
+
+<form method="POST" class="card p-3 mb-3">
+    {{ form.hidden_tag() }}
+
+    {{ form.nome.label }}
+    {{ form.nome(class="form-control mb-2") }}
+
+    {% for e in form.nome.errors %}
+        <small class="text-danger">{{ e }}</small>
+    {% endfor %}
+
+    {{ form.email.label }}
+    {{ form.email(class="form-control mb-2") }}
+
+    {% for e in form.email.errors %}
+        <small class="text-danger">{{ e }}</small>
+    {% endfor %}
+
+    <button class="btn btn-primary">Cadastrar</button>
+</form>
+
+<ul class="list-group">
+{% for u in usuarios %}
+    <li class="list-group-item">{{ u.nome }} - {{ u.email }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

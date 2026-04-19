@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    <li><a href="/usuarios" class="list-group-item list-group-item-action list-group-item-light">Gerenciar usuários</a></li>
+        {%if usuarios%}
+            {%for usuario in usuarios%}
+            <ul>
+                <li>{{usuario.nome}} ({{usuario.email}})</li>
+            </ul>
+            {%endfor%}
+        {%else%}
+            <p>Não há usuários cadastrados ainda...</p>
+        {%endif%}
+        <br>
+    <li ><a href="/mensagens" class="list-group-item list-group-item-action list-group-item-light">Gerenciar mensagens</a></li>
+    {%if mensagens%}
+        {%for mensagem in mensagens%}
+            <div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ mensagem.titulo }}</h5>
+                        <p class="card-text">{{ mensagem.conteudo }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {{ mensagem.data_hora }} -
+                                User ID : {{ mensagem.usuario_id}}
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    {%else%}
+        <p>Não há mensagens registradas...</p>
+    {%endif%}
+</ul>
+
+{% endblock %}

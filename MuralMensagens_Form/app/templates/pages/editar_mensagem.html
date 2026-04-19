@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Editar Mensagem</h2>
+
+<form method="POST" class="card p-3">
+    {{ form.hidden_tag() }}
+
+    {{ form.titulo(class="form-control mb-2") }}
+    {{ form.conteudo(class="form-control mb-2") }}
+    {{ form.usuario_id(class="form-select mb-2") }}
+
+    <button class="btn btn-primary">Salvar</button>
+</form>
+{% endblock %}
