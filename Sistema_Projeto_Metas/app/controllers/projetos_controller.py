@@ -12,6 +12,12 @@ def projetos(): #função principal
     form = ProjetoForm() #inicialização do formulário
 
     if form.validate_on_submit(): #verifica se o formulário está com os campos valdiados
+        projeto_existente = Projeto.query.filter_by(nome=form.nome.data).all()
+
+        if projeto_existente:
+            flash("Esse projeto já está cadastrado!")
+            return redirect("/projetos")
+
         novo_projeto = Projeto( #criação do item
             nome=form.nome.data,
             descricao=form.descricao.data,
@@ -19,6 +25,8 @@ def projetos(): #função principal
 
         db.session.add(novo_projeto) #adição na tabela
         db.session.commit() #salva a transação no banco
+        
+        flash("Projeto cadastrado com sucesso!", "success")
 
         return redirect("/")
 
@@ -33,6 +41,7 @@ def excluir_projeto(id):
     if projeto:
         db.session.delete(projeto)
         db.session.commit()
+        flash("Projeto excluído com sucesso!", "danger")
 
     return redirect("/projetos")
 
@@ -48,6 +57,8 @@ def editar_projeto(id):
         projeto.descricao=form.descricao.data
 
         db.session.commit()
+        flash("Projeto atualizado com sucesso!", "success")
+
         return redirect("/projetos")
 
     return render_template("pages/editar_projeto.html", form=form)

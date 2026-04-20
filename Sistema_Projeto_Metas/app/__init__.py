@@ -19,7 +19,7 @@ def create_app():
 
     app.register_blueprint(home_bp, url_prefix="/")
     app.register_blueprint(projeto_bp, url_prefix="/projetos")
-    app.register_blueprint(meta_bp, url_prefix="/projetos/<int:projetos_id>")
+    app.register_blueprint(meta_bp, url_prefix="/projetos/<int:projeto_id>/")
 
     @app.route("/")
     def index():

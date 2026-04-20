@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
-    <li><a href="/projetos" class="list-group-item list-group-item-action list-group-item-light">Gerenciar Projetos</a></li>
+<div>
+<h1>Bem-Vindo</h1>
+<h4>O Pro-Metas é um sistema para gerenciamento de projetos e metas</h4>
+</div>
+<br>
+<ul class="list-group">
+    <li class="list-group"><a href="/projetos" class="list-group-item list-group-item-action list-group-item-light"><h5 class="card-title">Gerenciar Projetos</h5></a></li>
+    <br>
         {%if projetos%}        
             {%for p in projetos%}
             <div>
@@ -11,9 +17,19 @@
                         <h5 class="card-title">{{p.nome}}</h5>
                         <p class="card-text">{{p.descricao}}</p>
                         <p class="card-text">
-                            <small class="text-muted">
-                                {{ p.data_criacao}} -
-                            </small>
+                        <p class="card-text">
+                        <small>
+                            Criado em - {{ p.data_criacao.strftime("%d/%m/%Y %H:%M") }}
+                        </small>
+                         </p>
+                        <p class="card-text">
+                        <small>
+                        {% if p.data_edicao %}
+                            Última edição - {{ p.data_edicao.strftime("%d/%m/%Y %H:%M") }}
+                        {% else %}
+                             Última edição - {{ p.data_criacao.strftime("%d/%m/%Y %H:%M") }}
+                        {% endif %}
+                        </small>
                         </p>
                     </div>
                 </div>

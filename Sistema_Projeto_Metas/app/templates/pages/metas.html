@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<h1>Projeto : {{projeto.nome}}</h1>
+<h5>{{projeto.descricao}}</h5>
+<br>
 <h2>Metas</h2>
 
 <form method="POST" class="card p-3 mb-3">
@@ -19,3 +23,48 @@
 
     <button class="btn btn-primary">Cadastrar</button>
 </form>
+
+<ul class="list-group">
+    {%if metas%}
+        {%for m in metas%}
+        <div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    {%if m.status == "Concluída" %}
+                    <p class="text-decoration-line-through">{{m.descricao}}</p>
+                    {%else%}
+                    <p class="card-text">{{m.descricao}}</p>
+                    {%endif%}
+                    <p class="card-text">{{m.status}}</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                        Criado em - {{ m.data_criacao.strftime("%d/%m/%Y %H:%M")}}
+                        </small>
+                        <br>
+                        <small class="text-muted">
+                        {% if m.data_edicao %}
+                            Última edição - {{ m.data_edicao.strftime("%d/%m/%Y %H:%M") }}
+                        {% else %}
+                            Última edição - {{ m.data_criacao.strftime("%d/%m/%Y %H:%M") }}
+                        {% endif %}
+                        </small>
+                    </p>
+                    {%if m.status == "Concluída" %}
+                        <a href="/projetos/{{projeto.id}}/metas/reabrir/{{m.id}}">Reabrir</a>
+                    {%else%}
+                        <a href="/projetos/{{projeto.id}}/metas/concluir/{{m.id}}">Concluir</a>
+                    {%endif%}
+                    <br>
+                    <a href="/projetos/{{projeto.id}}/metas/editar/{{m.id}}">Editar</a> | 
+                    <a href="/projetos/{{projeto.id}}/metas/excluir/{{m.id}}">Excluir</a>
+   
+
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    {%else%}
+        <p>Não há metas para o projeto...</p>
+    {%endif%}
+</ul>
+{% endblock %}

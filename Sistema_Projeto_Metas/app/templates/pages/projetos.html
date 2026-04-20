@@ -24,23 +24,36 @@
 </form>
 
 <ul class="list-group">
-    {%for p in projetos%}
-    <div>
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{p.nome}}</h5>
-                <p class="card-text">{{p.descricao}}</p>
-                <p class="card-text">
-                    <small class="text-muted">
-                        {{ p.data_criacao}} -
+    {%if projetos%}
+        {%for p in projetos%}
+        <div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{p.nome}}</h5>
+                    <p class="card-text">{{p.descricao}}</p>
+                    <small>
+                    <p class="card-text">
+                        Criado em - {{ p.data_criacao.strftime("%d/%m/%Y %H:%M") }}
                     </small>
-                </p>
-                <a href="#">Ver Metas</a>
-                <a href="/projetos/editar/{{p.id}}">Editar</a>
-                <a href="/projetos/excluir/{{p.id}}">Excluir</a>
+                    </p>
+                    <p class="card-text">
+                    <small>
+                    {% if p.data_edicao %}
+                    Última edição - {{ p.data_edicao.strftime("%d/%m/%Y %H:%M") }}
+                    {% else %}
+                            Última edição - {{ p.data_criacao.strftime("%d/%m/%Y %H:%M") }}
+                    {% endif %}
+                    </small>
+                    </p>
+                    <a href="/projetos/{{p.id}}/metas">Ver Metas</a>
+                    <a href="/projetos/editar/{{p.id}}">Editar</a>
+                    <a href="/projetos/excluir/{{p.id}}">Excluir</a>
+                </div>
             </div>
         </div>
-    </div>
-{%endfor%}
+        {%endfor%}
+    {%else%}
+        <p>Não há projetos cadastrados ainda...</p>
+    {%endif%}
 </ul>
 {% endblock %}
